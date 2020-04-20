@@ -1,0 +1,1 @@
+export const title = "Simple Weather App";
