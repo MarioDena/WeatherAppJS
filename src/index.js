@@ -43,7 +43,6 @@ const createBody = () => {
   element.appendChild(createMain());
   element.appendChild(createFooter());
 
-
   return element;
 };
 

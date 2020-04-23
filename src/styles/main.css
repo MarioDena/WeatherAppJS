@@ -5,6 +5,10 @@
   text-shadow: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 img {
   width: 80%;
 }
@@ -97,7 +101,13 @@ input {
 }
 
 .autocomplete-active {
-  background-color: DodgerBlue !important;
+  background-color: lightgray !important;
   color: #ffffff;
+}
+
+.units {
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /*# sourceMappingURL=main.css.map */

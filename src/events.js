@@ -1,12 +1,19 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
-/* eslint-disable func-names */
 /* eslint-disable import/prefer-default-export */
 import * as variables from './variables';
+import * as request from './request';
 
-const showPageResults = (city) => {
+const showPageResults = (input) => {
+  request.displayPageResults(input.value);
+};
 
+export const reassignButtons = (cityName) => {
+  document.getElementById('metricUnit').addEventListener('click', request.getData.bind(this, cityName, 'metric'));
+  document.getElementById('imperialUnit').addEventListener('click', request.getData.bind(this, cityName, 'imperial'));
+  document.getElementById('backToMain').addEventListener('click', request.events.showSearchPage.bind(this));
 };
 
 export const assignFunction = (id) => {
@@ -17,7 +24,7 @@ export const assignFunction = (id) => {
   }
   if (id === 'searchButton') {
     const input = document.getElementById('city');
-    button.addEventListener('click', showPageResults.bind(this));
+    button.addEventListener('click', showPageResults.bind(this, input));
   }
 };
 
@@ -55,7 +62,7 @@ export const autocomplete = (inp, arr) => {
     if (currentFocus < 0) currentFocus = (x.length - 1);
     x[currentFocus].classList.add('autocomplete-active');
   };
-  inp.addEventListener('input', function (e) {
+  inp.addEventListener('input', function b(e) {
     let a; let b; let i; const
       val = this.value;
     closeAllLists();
@@ -72,7 +79,7 @@ export const autocomplete = (inp, arr) => {
         b.innerHTML = `<strong>${arr[i].substr(0, val.length)}</strong>`;
         b.innerHTML += arr[i].substr(val.length);
         b.innerHTML += `<input type='hidden' value='${arr[i]}'>`;
-        b.addEventListener('click', function (e) {
+        b.addEventListener('click', function b(e) {
           inp.value = this.getElementsByTagName('input')[0].value;
           closeAllLists();
         });
@@ -80,7 +87,7 @@ export const autocomplete = (inp, arr) => {
       }
     }
   });
-  inp.addEventListener('keydown', function (e) {
+  inp.addEventListener('keydown', function b(e) {
     let x = document.getElementById(`${this.id}autocomplete-list`);
     if (x) x = x.getElementsByTagName('div');
     if (e.keyCode === 40) {
