@@ -1,7 +1,5 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import * as variables from './variables';
 import * as request from './request';
@@ -13,13 +11,12 @@ const showPageResults = (input) => {
 export const reassignButtons = (cityName) => {
   document.getElementById('metricUnit').addEventListener('click', request.getData.bind(this, cityName, 'metric'));
   document.getElementById('imperialUnit').addEventListener('click', request.getData.bind(this, cityName, 'imperial'));
-  document.getElementById('backToMain').addEventListener('click', request.events.showSearchPage.bind(this));
+  document.getElementById('backToMain').addEventListener('click', showSearchPage.bind(this));
 };
 
 export const assignFunction = (id) => {
   const button = document.getElementById(id);
   if (id === 'homeButton') {
-    // eslint-disable-next-line no-use-before-define
     button.addEventListener('click', showSearchPage.bind(this));
   }
   if (id === 'searchButton') {
@@ -32,7 +29,6 @@ export const showSearchPage = () => {
   const main = document.getElementById('main');
   main.innerHTML = variables.searchPageHTML;
 
-  // eslint-disable-next-line no-use-before-define
   autocomplete(document.getElementById('city'), variables.allCities);
   assignFunction('searchButton');
 };
