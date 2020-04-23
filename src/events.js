@@ -3,12 +3,34 @@
 /* eslint-disable consistent-return */
 /* eslint-disable func-names */
 /* eslint-disable import/prefer-default-export */
-const cities = require('all-the-cities');
+import * as variables from './variables';
 
-export const allCities = cities.map(a => a.name);
+const showPageResults = (city) => {
 
+};
 
-const autocomplete = (inp, arr) => {
+export const assignFunction = (id) => {
+  const button = document.getElementById(id);
+  if (id === 'homeButton') {
+    // eslint-disable-next-line no-use-before-define
+    button.addEventListener('click', showSearchPage.bind(this));
+  }
+  if (id === 'searchButton') {
+    const input = document.getElementById('city');
+    button.addEventListener('click', showPageResults.bind(this));
+  }
+};
+
+export const showSearchPage = () => {
+  const main = document.getElementById('main');
+  main.innerHTML = variables.searchPageHTML;
+
+  // eslint-disable-next-line no-use-before-define
+  autocomplete(document.getElementById('city'), variables.allCities);
+  assignFunction('searchButton');
+};
+
+export const autocomplete = (inp, arr) => {
   let currentFocus;
 
   const closeAllLists = (elmnt) => {
@@ -40,7 +62,7 @@ const autocomplete = (inp, arr) => {
     if (!val) { return false; }
     currentFocus = -1;
     // eslint-disable-next-line prefer-const
-    a = document.createElement('DIV');
+    a = document.createElement('div');
     a.setAttribute('id', `${this.id}autocomplete-list`);
     a.setAttribute('class', 'autocomplete-items');
     this.parentNode.appendChild(a);
