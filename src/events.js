@@ -3,6 +3,9 @@
 /* eslint-disable import/prefer-default-export */
 import * as variables from './variables';
 import * as request from './request';
+import debounce from './helpers';
+
+const autocompleteDelay = 1000;
 
 const showPageResults = (input) => {
   request.displayPageResults(input.value);
@@ -58,7 +61,7 @@ export const autocomplete = (inp, arr) => {
     if (currentFocus < 0) currentFocus = (x.length - 1);
     x[currentFocus].classList.add('autocomplete-active');
   };
-  inp.addEventListener('input', function b(e) {
+  inp.addEventListener('input', debounce(function b(e) {
     let a; let b; let i; const
       val = this.value;
     closeAllLists();
@@ -82,8 +85,8 @@ export const autocomplete = (inp, arr) => {
         a.appendChild(b);
       }
     }
-  });
-  inp.addEventListener('keydown', function b(e) {
+  }, autocompleteDelay));
+  inp.addEventListener('keydown', debounce(function b(e) {
     let x = document.getElementById(`${this.id}autocomplete-list`);
     if (x) x = x.getElementsByTagName('div');
     if (e.keyCode === 40) {
@@ -98,7 +101,7 @@ export const autocomplete = (inp, arr) => {
         if (x) x[currentFocus].click();
       }
     }
-  });
+  }, autocompleteDelay));
   document.addEventListener('click', (e) => {
     closeAllLists(e.target);
   });
